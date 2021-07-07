@@ -417,6 +417,7 @@ pub enum ErrorKind {
   Many1Count,
   Float,
   Satisfy,
+  TakeUntilParserMatches,
 }
 
 #[rustfmt::skip]
@@ -477,6 +478,7 @@ pub fn error_to_u32(e: &ErrorKind) -> u32 {
     ErrorKind::Many1Count                => 73,
     ErrorKind::Float                     => 74,
     ErrorKind::Satisfy                   => 75,
+    ErrorKind::TakeUntilParserMatches    => 76,
   }
 }
 
@@ -539,6 +541,7 @@ impl ErrorKind {
       ErrorKind::Many1Count                => "Count occurrence of >=1 patterns",
       ErrorKind::Float                     => "Float",
       ErrorKind::Satisfy                   => "Satisfy",
+      ErrorKind::TakeUntilParserMatches    => "Take until parser matches",
     }
   }
 }
