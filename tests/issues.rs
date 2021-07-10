@@ -358,3 +358,16 @@ fn issue_1231_bits_expect_fn_closure() {
   }
   assert_eq!(example(&[0xff]), Ok((&b""[..], (1, 1))));
 }
+
+#[test]
+fn issue_1082() {
+    use nom::bytes::complete::escaped_transform;
+    use nom::multi::many1;
+    use nom::IResult;
+    use nom::character::complete::{alpha1, char, one_of};
+
+    fn parser(i: &str) -> IResult<&str, Vec<String>> {
+        many1(escaped_transform(alpha1, '\\', one_of(r#"\\"#)))(i)
+    }
+    assert_eq!(parser("aaa\\\\"), Ok(("", vec!["aaa\\".to_owned()])));
+}
