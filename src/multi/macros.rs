@@ -712,7 +712,8 @@ mod tests {
       multi(c),
       Err(Err::Error(error_position!(c, ErrorKind::Tag)))
     );
-    assert_eq!(multi(d), Err(Err::Incomplete(Needed::new(4))));
+    let res3 = vec![&b"abcd"[..]];
+    assert_eq!(multi(d), Ok((&b"ab"[..], res3)));
   }
 
   #[test]

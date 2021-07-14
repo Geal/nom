@@ -118,7 +118,7 @@ where
 
       loop {
         match f.parse(i.clone()) {
-          Err(Err::Error(_)) => return Ok((i, acc)),
+          Err(Err::Error(_)| Err::Incomplete(_)) => return Ok((i, acc)),
           Err(e) => return Err(e),
           Ok((i1, o)) => {
             if i1 == i {
